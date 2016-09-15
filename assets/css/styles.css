@@ -2019,3 +2019,13 @@ ul.custom-list-style li {
     width: 255px;
   }
 }
+
+
+/* Custom styles from HK */
+
+.login-box {
+  margin-top: 50px;
+  border: 1px solid cyan;
+  box-shadow: 0px 0px 5px cyan;
+  border-radius: 4px;
+}
