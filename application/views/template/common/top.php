@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en" data-ng-app="app"> 
 <head>
-    <title>Responsive website template</title>
+    <title>Angular App</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

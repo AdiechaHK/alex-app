@@ -10,4 +10,9 @@ class Welcome extends CI_Controller {
 		view($this, 'welcome_message');
 
 	}
+
+	public function main()
+	{
+		view($this, 'welcome/main');
+	}
 }

@@ -1,3 +1,5 @@
+    <div id="site-url" data-url="<?=site_url()?>"></div>
+
     <div class="wrapper">
         <!-- ******HEADER****** --> 
         <header class="header">  
@@ -39,7 +41,7 @@
         </header><!--//header-->
 
         <!-- ******NAV****** -->
-        <nav class="main-nav" role="navigation">
+        <nav class="main-nav" role="navigation" data-ng-controller="NavigationCtrl">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
@@ -51,6 +53,69 @@
                 </div><!--//navbar-header-->            
                 <div class="navbar-collapse collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav">
+                        <!-- Base menu level -->
+                        <li 
+                            data-ng-repeat="baseMenu in getBaseMenus()"
+                            class="nav-item"
+                            data-ng-class="{'dropdown': baseMenu.type == 'PARENT'}">
+
+                            <!-- Normal menu -->
+                            <a href="getLink(baseMenu)" data-ng-if="baseMenu.type != 'PARENT'">
+                                {{baseMenu.title}}
+                            </a>
+
+                            <!-- Menu title that contains drop down -->
+                            <a  data-ng-if="baseMenu.type == 'PARENT'"
+                                class="dropdown-toggle"
+                                data-toggle="dropdown"
+                                data-hover="dropdown"
+                                data-delay="0"
+                                data-close-others="false"
+                                href="#" >
+                                    {{baseMenu.title}}
+                                    <i class="fa fa-angle-down"></i>
+                            </a>
+
+                            <!-- Menu level 1 -->
+                            <ul data-ng-if="baseMenu.type == 'PARENT'" class="dropdown-menu">
+                                <li
+                                    data-ng-repeat="menul1 in getSubMenu(baseMenu.id)"
+                                    data-ng-class="{'dropdown-submenu': menul1.type == 'PARENT'}"
+                                    >
+                                        <a
+                                            href="getLink(menul1)"
+                                            data-ng-if="menul1.type != 'PARENT'">
+                                                {{menul1.title}}
+                                        </a>
+
+                                        <a
+                                            class="trigger"
+                                            tabindex="-1"
+                                            href="#"
+                                            data-ng-if="menul1.type == 'PARENT'">
+                                                {{menul1.title}}
+                                                <i class="fa fa-angle-right"></i>
+                                        </a>
+
+                                        <!-- Drop down level 2 -->
+                                        <ul class="dropdown-menu" data-ng-if="menul1.type == 'PARENT'">
+                                            <li
+                                                data-ng-repeat="menul2 in getSubMenu(menul1.id)"
+                                                data-ng-class="{'dropdown-submenu': menul2.type == 'PARENT'}"
+                                                >
+                                                    <a href="getLink(menul2)" >
+                                                            {{menul2.title}}
+                                                    </a>
+
+                                            </li>
+                                        </ul>
+
+
+                                </li>
+                            </ul>
+                        </li>
+
+
                         <li class="active nav-item"><a href="index.html">Home</a></li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Courses <i class="fa fa-angle-down"></i></a>
@@ -112,7 +177,7 @@
                                 <li><a href="icons.html"><i class="fa fa-heart"></i> Icons</a></li>                                                 
                             </ul>
                         </li><!--//dropdown-->
-                        <li class="nav-item"><a href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a href="contact.html">Contact {{title}} </a></li>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </div><!--//container-->

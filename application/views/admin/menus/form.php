@@ -31,6 +31,9 @@
   <div class="form-group">
     <label for="page">Select page</label>
     <select name="page" id="page" class="form-control">
+      <option value="none" <?=(isset($menu) && $menu->page == NULL)? "selected": ""?> >
+        -- None --
+      </option>
       <?php foreach ($pages as $page) { ?>
         <option value="<?=$page->id?>" <?=(isset($menu) && $menu->page == $page->id)? "selected": ""?> >
           <?=$page->title?>
@@ -42,19 +45,19 @@
   <div class="form-group">
     <label for="parent">Select parent</label>
     <select name="parent" id="parent" class="form-control">
+      <option value="none" <?=(isset($menu) && $menu->parent == NULL)? "selected": ""?> >
+        -- None --
+      </option>
       <?php foreach ($parents as $parent) { ?>
         <option value="<?=$parent->id?>" <?=(isset($menu) && $menu->parent == $parent->id)? "selected": ""?> >
           <?=$parent->title?>
         </option>
       <?php } ?>
-      <option value="none" <?=(isset($menu) && $menu->parent == NULL)? "selected": ""?> >
-        -- None --
-      </option>
     </select>
   </div>
 
   <div class="form-group">
-    <input type="submit" value="Save Page" class="btn btn-success">
+    <input type="submit" value="Save Menu" class="btn btn-success">
   </div>
   
 <?=form_close()?>

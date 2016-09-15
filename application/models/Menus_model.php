@@ -43,8 +43,8 @@ class Menus_model extends CI_Model
     $this->title    = isset($data['title'])?$data['title']:NULL; 
     $this->type     = isset($data['type'])?$data['type']:'PAGE'; 
     $this->link     = isset($data['link'])?$data['link']:NULL; 
-    $this->page     = isset($data['page'])?$data['page']:NULL; 
-    $this->parent   = isset($data['parent']) && $data['parent'] != "none" ?$data['parent']:NULL; 
+    $this->page     = isset($data['page']) && $data['page'] != "none"? $data['page']:NULL; 
+    $this->parent   = isset($data['parent']) && $data['parent'] != "none"? $data['parent']:NULL; 
 
     $this->db->insert('menus', $this);
   }
@@ -54,7 +54,7 @@ class Menus_model extends CI_Model
     $this->title    = isset($data['title'])?$data['title']:NULL; 
     $this->type     = isset($data['type'])?$data['type']:'PAGE'; 
     $this->link     = isset($data['link'])?$data['link']:NULL; 
-    $this->page     = isset($data['page'])?$data['page']:NULL; 
+    $this->page     = isset($data['page']) && $data['page'] != "none"? $data['page']:NULL; 
     $this->parent   = isset($data['parent']) && $data['parent'] != "none"?$data['parent']:NULL; 
 
     $this->db->update('menus', $this, array('id' => $id));
