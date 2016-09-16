@@ -4,6 +4,8 @@
 <script type="text/javascript" src="<?=base_url('assets/plugins/bootstrap-hover-dropdown.min.js')?>"></script> 
 <script type="text/javascript" src="<?=base_url('assets/plugins/angular.min.js')?>"></script> 
 <script type="text/javascript" src="<?=base_url('assets/plugins/angular-route.min.js')?>"></script> 
+<script type="text/javascript" src="<?=base_url('assets/plugins/ui-bootstrap-tpls-2.1.3.min.js')?>"></script> 
+<script type="text/javascript" src="<?=base_url('assets/plugins/ui-bootstrap-2.1.3.min.js')?>"></script> 
 
 <!-- Angular application script -->
 <script type="text/javascript" src="<?=base_url('assets/angular/app.js')?>"></script> 

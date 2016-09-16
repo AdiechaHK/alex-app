@@ -57,7 +57,7 @@
                         <li 
                             data-ng-repeat="baseMenu in getBaseMenus()"
                             class="nav-item"
-                            data-ng-class="{'dropdown': baseMenu.type == 'PARENT'}">
+                            data-ng-class="{'dropdown angularDD': baseMenu.type == 'PARENT'}">
 
                             <!-- Normal menu -->
                             <a href="getLink(baseMenu)" data-ng-if="baseMenu.type != 'PARENT'">
@@ -70,8 +70,7 @@
                                 data-toggle="dropdown"
                                 data-hover="dropdown"
                                 data-delay="0"
-                                data-close-others="false"
-                                href="#" >
+                                data-close-others="false" >
                                     {{baseMenu.title}}
                                     <i class="fa fa-angle-down"></i>
                             </a>
@@ -91,7 +90,6 @@
                                         <a
                                             class="trigger"
                                             tabindex="-1"
-                                            href="#"
                                             data-ng-if="menul1.type == 'PARENT'">
                                                 {{menul1.title}}
                                                 <i class="fa fa-angle-right"></i>
@@ -115,6 +113,8 @@
                             </ul>
                         </li>
 
+
+                        <!-- 
 
                         <li class="active nav-item"><a href="index.html">Home</a></li>
                         <li class="nav-item dropdown">
@@ -166,7 +166,7 @@
                                 <li><a href="privacy.html">Privacy Policy</a></li> 
                                 <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>                   
                             </ul>
-                        </li><!--//dropdown-->
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Shortcodes <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -176,9 +176,12 @@
                                 <li><a href="components.html"><i class="fa fa-rocket"></i> Components</a></li> 
                                 <li><a href="icons.html"><i class="fa fa-heart"></i> Icons</a></li>                                                 
                             </ul>
-                        </li><!--//dropdown-->
+                        </li>
                         <li class="nav-item"><a href="contact.html">Contact {{title}} </a></li>
+                         -->
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
+
+
             </div><!--//container-->
         </nav><!--//main-nav-->
