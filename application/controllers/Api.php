@@ -25,7 +25,7 @@ class Api extends CI_Controller {
 
   private function base_menu($menu, $json)
   {
-    if($menu->parent == null) {
+    if($menu->parent == null || $menu->parent == 0) {
       if(!array_key_exists('base_list', $json)) $json['base_list'] = array();
       array_push($json['base_list'], $menu);
     }
@@ -34,7 +34,7 @@ class Api extends CI_Controller {
 
   private function level_menu($menu, $json)
   {
-    if($menu->parent != null) {
+    if($menu->parent != null && $menu->parent != 0) {
       if(!array_key_exists($menu->parent, $json)) $json[$menu->parent] = array();
       array_push($json[$menu->parent], $menu);
     }

@@ -12,6 +12,7 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		admin($this, 'admin/index');
+    redirect('admin/pages');
 	}
 
   public function logout()
@@ -76,12 +77,16 @@ class Admin extends CI_Controller {
     redirect('admin/pages');
   }
 
+
   // Menu related methods
   public function menus() {
+
+
     $this->load->model('Menus_model', 'menus');
+    
     $data = array(
         'section' => 'menus',
-        'menus'   => $this->menus->all()
+        'menus'   => $this->menus->getMenuJson()
       );
     admin($this, 'admin/menus/index', $data);
   }
@@ -110,10 +115,33 @@ class Admin extends CI_Controller {
   {
     $this->load->model('Menus_model', 'menus');
     if($id == NULL) $this->menus->insert($_POST);
-    else $this->menus->update($id, $_POST);
+    else $this->menus->greedy_update($id, $_POST);
     redirect('admin/menus');
   }
 
+  public function menu_show($id)
+  {
+    $this->load->model('Pages_model', 'pages');
+    $this->load->model('Menus_model', 'menus');
+    $data = array(
+        'section' => 'menus',
+        'pages' => $this->pages->all(),
+        'menu' => $this->menus->find($id)
+      );
+    admin($this, 'admin/menus/show', $data);
+  }
 
+  public function menu_update() {
+
+    $this->load->model('Menus_model', 'menus');
+
+    // $this->menus->greedy_update('*', array('parent' => NULL));
+
+    foreach ($_REQUEST['list'] as $menu) {
+      $this->menus->greedy_update($menu['id'], $menu);
+    }
+    echo "Updated successfully !";  
+    exit;
+  }
 
 }

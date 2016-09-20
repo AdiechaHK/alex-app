@@ -5,14 +5,22 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		// $this->load->view('welcome_message');
+		$this->load->model('Menus_model', 'menus');
 
-		view($this, 'welcome_message');
+	    $data['menus'] = $this->menus->getMenuJson();
+
+	    // echo json_encode($data);
+
+		view($this, 'welcome_message', $data);
 
 	}
 
 	public function main()
 	{
-		view($this, 'welcome/main');
+		$this->load->model('Menus_model', 'menus');
+
+	    $data['menus'] = $this->menus->getMenuJson();
+
+		view($this, 'welcome/main', $data);
 	}
 }

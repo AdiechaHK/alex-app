@@ -1,0 +1,32 @@
+.menu-block {
+	border: 1px solid black;
+	padding: 18px 12px;
+	margin: 5px;
+}
+
+.sub-list {
+	padding: 10px 0px;
+}
+
+.placeholder {
+	border: 1px dashed black;
+}
+
+ol.no-num,ol.no-num ol {
+	list-style: none;
+}
+
+.menu-list{
+	padding-left: 0;
+}
+
+.menu-list li {
+    margin: 5px 5px;
+    padding: 5px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 7px #CCC;
+    cursor: pointer;
+    border-left-color: #337AB7;
+}

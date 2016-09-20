@@ -56,9 +56,10 @@ app.directive('menuItem', function($compile) {
 app.controller('NavigationCtrl',
   [ 
     '$scope', 
+    '$location',
     'NavigationService',
 
-    function($scope, NavigationService) {
+    function($scope, $location, NavigationService) {
 
       var menus = {};
 
@@ -68,12 +69,10 @@ app.controller('NavigationCtrl',
           menus = res.data;
         });
       }
-
-      $scope.getBaseMenus = function() { return menus.base_list; };
-
-      $scope.getLink = function() { return '#'; };
-
-      $scope.getSubMenu = function(key) { return menus[key]; };
+      
+      $scope.$watch(function(){ return $location.search() }, function(params){
+          console.log(params);
+      });
 
       init();
     }

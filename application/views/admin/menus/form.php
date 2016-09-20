@@ -10,25 +10,25 @@
     <input type="text" name="title" id="title" class="form-control" value="<?=isset($menu)?$menu->title:''?>">
   </div>
 
-  <div class="form-group">
+  <div class="form-group" id="type-field">
     <label for="type">Select type</label>
     <select name="type" id="type" class="form-control">
       <?php foreach (['page', 'link', 'parent'] as $type) { ?>
         <option
           value="<?=strtoupper($type)?>"
-          <?=(isset($menu) && $menu->type == $type)?'selected':''?> >
+          <?=(isset($menu) && strtolower($menu->type) == $type)?'selected':''?> >
             <?=ucfirst($type)?>
         </option>
       <?php } ?>
     </select>
   </div>
 
-  <div class="form-group">
+  <div class="form-group conditional hide" id="link-field">
     <label for="link">Enter link</label>
     <input type="text" name="link" id="link" class="form-control" value="<?=isset($menu)?$menu->link:''?>">
   </div>
 
-  <div class="form-group">
+  <div class="form-group conditional hide" id="page-field">
     <label for="page">Select page</label>
     <select name="page" id="page" class="form-control">
       <option value="none" <?=(isset($menu) && $menu->page == NULL)? "selected": ""?> >

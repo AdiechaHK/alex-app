@@ -1,6 +1,18 @@
 var map;
 $(document).ready(function() {
 
+    var menuList = $('#navbar-collapse > ul > li.nav-item');
+    $(menuList).click(function() {
+        $(menuList).removeClass('active');
+        $(this).addClass('active');
+    });
+    $(menuList).each(function(i, item) {
+        var href = $("> a", item).attr('href');
+        href = href.substr(href.indexOf('#'));
+        if (window.location.hash == href) $(item).addClass('active');
+    });
+
+
     /* ======= Flexslider ======= */
     $('.flexslider').flexslider({
         animation: "fade"
