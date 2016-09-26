@@ -1,4 +1,12 @@
+
 $(document).ready(function() {
+
+
+  // General purpose script
+  var url = function(str) {
+    return $("#site-url").data('url') + str;
+  }
+
 
   // Menu listing script 
   var ns = $( 'ol.sortable' ).nestedSortable({
@@ -59,7 +67,7 @@ $(document).ready(function() {
 
   $( '#menu-update' ).on('click', function() {
     getJson(function(json) {
-      $.post($("#site-url").data('url') + "/admin/menu_update", json).then(function(res) {
+      $.post(url("/admin/menu_update"), json).then(function(res) {
         alert(res);
       });
     });
@@ -85,5 +93,94 @@ $(document).ready(function() {
     }
   }
   initCkEditor();
+
+  // Lang scripts
+
+  var getInput = function(name, value) {
+    if(typeof value == "undefined") value = '';
+    return $("<td/>", {
+      "data-lang-field": name
+    }).append($("<input/>", {
+      "class": "form-control",
+      "name": name,
+      "value": value
+    }))
+  }
+
+  var generateLangForm = function(target, id) {
+    var line = $("<tr/>", {"data-target": typeof id != "undefined"? id: "new"});
+    $(line).append(getInput('key', $("[data-lang-field=key]", target).text()));
+    $(line).append(getInput('value_l1', $("[data-lang-field=value_l1]", target).text()));
+    $(line).append(getInput('value_l2', $("[data-lang-field=value_l2]", target).text()));
+    $(line).append($("<td/>", {"data-action":""}).append($("<button/>", {"class": "btn btn-success save", "text": "Save"})));
+    $(target).before(line);
+    $("[data-lang-field=key] input", line).focus();
+    if(typeof id != "undefined") $(target).hide();
+  }
+  var generateLangRow = function(target, id) {
+    $(target).removeAttr('data-target');
+    $(target).attr('data-lang-id', id);
+    $("[data-lang-field]", target).each(function(i, item) {
+      $(item).html($("input", item).val());
+    });
+    $("[data-action]", target).empty()
+      .append($("<button/>", {'class': "btn btn-default edit", 'text': "Edit"}))
+      .append("&nbsp;")
+      .append($("<button/>", {'class': "btn btn-default delete", 'text': "Delete"}));
+  }
+
+  var getTarget = function(ele) {
+   return $(ele).parents('tr:first');
+  }
+
+  $( '#lang-list' ).delegate('.save ', 'click', function() {
+    var target = getTarget(this);
+    var id = $(target).data('target');
+    var json = {};
+    var callback = function(){};
+
+    $("[data-lang-field]", target).each(function(i, item) {
+      json[$(item).data('lang-field')] = $("input", item).val();
+    }).promise().done(function(){
+      if(id == "new") {
+        // For new entry
+        id = '';
+        callback = function (res) {
+          res = eval("("+res+")");
+          generateLangRow(target, res.id);
+        }
+      } else {
+        // For edit entry
+        callback = function(res) {
+          $("[data-lang-id="+id+"]").remove();
+          generateLangRow(target, id);
+        }
+      }
+      // callback();
+      $.post(url("/admin/lang_save/"+id), json).then(callback);
+    })
+  });
+  $( '#lang-list' ).delegate('.add', 'click', function() {
+    var target = getTarget(this);
+    generateLangForm(target);
+  });
+  $( '#lang-list' ).delegate('.edit', 'click', function() {
+    var target = getTarget(this);
+    generateLangForm(target, $(target).data('lang-id'));
+  });
+  $( '#lang-list' ).delegate('.delete', 'click', function() {
+    if(confirm("Are you sure?")) {
+      var self = this;
+      $.get(url('/admin/lang_del/' + $(self).data('lang-id'))).then(function() {
+        $(self).parents('tr:first').remove();
+      });
+    };
+  });
+  $( '#lang-list' ).delegate('.delete', 'mouseenter', function() {
+    $(this).removeClass('btn-default').addClass('btn-danger');
+  });
+  $( '#lang-list' ).delegate('.delete', 'mouseleave', function() {
+    $(this).removeClass('btn-danger').addClass('btn-default');
+  });
 
 });

@@ -1,16 +1,30 @@
-var app = angular.module('app', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('app', [
+  'ngRoute',
+  'ui.bootstrap',
+  'pascalprecht.translate',
+  'ngCookies']);
 
-
-app.run(function($rootScope) {
-    // var views = $('#site-url').data('url');
-    // $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-    //     console.log(current);
-    // });
-});
-
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider, $locationProvider, $translateProvider) {
 
   var views = $('#site-url').data('url');
+
+
+  var initTranslater = function(lang) {
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'assets/lang/',
+      suffix: '.json'
+    });
+
+    $translateProvider.preferredLanguage(lang);
+  }
+
+  angular.injector(['ngCookies']).invoke(['$cookies', function($cookies) {
+    var lang = $cookies.get('lang');
+    lang = typeof lang == "undefined"? 'fr': lang;
+    console.log(lang);
+    initTranslater(lang);
+    $cookies.put('lang', lang);
+  }]);
 
   $routeProvider
    .when('/show/:id', {

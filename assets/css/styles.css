@@ -2029,3 +2029,23 @@ ul.custom-list-style li {
   box-shadow: 0px 0px 5px cyan;
   border-radius: 4px;
 }
+
+.lang-dropdown option {
+  background: #4678A1;
+}
+
+.lang-dropdown {
+  border: 1px solid #CCC;
+  background: transparent;
+  color: white;
+  border-radius: 3px;
+  margin: 8px 0;
+  text-transform: uppercase;
+  font-family: 'open sans', arial, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+.lang-dropdown:focus {
+  border-color: #CCC
+}

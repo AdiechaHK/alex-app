@@ -40,4 +40,25 @@ class Api extends CI_Controller {
     }
     return $json;
   }
+
+  public function lang() {
+    $langs = [
+      'fr' => "value_l1",
+      'nl' => "value_l2"
+    ];
+
+    $loadLang = $_GET['lang'];
+
+    $this->load->model('Langs_model', 'langs');
+    $list = $this->langs->all();
+
+    $arr = array();
+    foreach ($list as $item) {
+      $val = $langs[$loadLang];
+      $arr[$item->key] = $item->$val;
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode( $arr );
+  }
 }

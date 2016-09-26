@@ -1,25 +1,25 @@
     </div><!--//wrapper-->
 
     <!-- ******FOOTER****** --> 
-    <footer class="footer">
+    <footer class="footer" data-ng-controller="FooterCtrl">
         <div class="footer-content">
             <div class="container">
                 <div class="row">
                 <div class="footer-col col-md-3 col-sm-4 about">
                     <div class="footer-col-inner">
-                        <h3>About</h3>
+                        <h3>{{'about_title_footer'|translate}}</h3>
                         <ul>
-                            <li><a href="about.html"><i class="fa fa-caret-right"></i>About us</a></li>
-                            <li><a href="contact.html"><i class="fa fa-caret-right"></i>Contact us</a></li>
-                            <li><a href="privacy.html"><i class="fa fa-caret-right"></i>Privacy policy</a></li>
-                            <li><a href="terms-and-conditions.html"><i class="fa fa-caret-right"></i>Terms & Conditions</a></li>
+                            <li><a href="about.html"><i class="fa fa-caret-right"></i>{{'about_us'|translate}}</a></li>
+                            <li><a href="contact.html"><i class="fa fa-caret-right"></i>{{'contact_us'|translate}}</a></li>
+                            <li><a href="privacy.html"><i class="fa fa-caret-right"></i>{{'privacy_policy'|translate}}</a></li>
+                            <li><a href="terms-and-conditions.html"><i class="fa fa-caret-right"></i>{{'terms_conditions'|translate}}</a></li>
                         </ul>
                     </div><!--//footer-col-inner-->
                 </div><!--//foooter-col-->
                 <div class="footer-col col-md-6 col-sm-8 newsletter">
                     <div class="footer-col-inner">
-                        <h3>Join our mailing list</h3>
-                        <p>Subscribe to get our weekly newsletter delivered directly to your inbox</p>
+                        <h3>{{'subscription_title'|translate}}</h3>
+                        <p>{{'subscription_desc'|translate}}</p>
                         <form class="subscribe-form">
                             <div class="form-group">
                                 <input type="email" class="form-control" placeholder="Enter your email" />

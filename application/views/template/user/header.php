@@ -86,7 +86,7 @@
                 </li>
             <?php } else { ?>
             <li class="nav-item">
-              <a href="<?=getHref($item)?>"><?=$item->title?></a>
+              <a href="<?=getHref($item)?>">{{'<?=$item->title?>'|translate}}</a>
             </li>
             <?php } ?>
         <?php }?>
@@ -103,9 +103,27 @@
 
             <?php } ?>
 
+            <li class="nav-item">
+              <a href="#/something">{{'sample' | translate}}</a>
+            </li>
+
+
           </ul>
 
         <?php } ?>
+
+        <ul class="nav navbar-nav pull-right">
+          <li>
+            <select
+              id="lang"
+              class="form-control lang-dropdown"
+              data-ng-change="changeLang()"
+              data-ng-model="lang">
+              <option value="fr">France</option>
+              <option value="nl">Netherland</option>
+            </select>
+          </li>
+        </ul>
 
         </div><!--//navabr-collapse-->
 

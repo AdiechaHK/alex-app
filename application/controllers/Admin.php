@@ -144,4 +144,33 @@ class Admin extends CI_Controller {
     exit;
   }
 
+
+  public function menu_del($id) {
+    $this->load->model('Menus_model', 'menus');
+    $this->menus->delete($id);
+    redirect('admin/menus');
+  }
+
+  public function langs() {
+    $this->load->model('Langs_model', 'langs');
+    $data = array(
+      'section' => 'langs',
+      'langs'   => $this->langs->all()
+    );
+    admin($this, 'admin/langs/index', $data);
+  }
+
+  public function lang_save($id = NULL) {
+    $this->load->model('Langs_model', 'langs');
+    if($id == NULL) $id = $this->langs->insert($_POST);
+    else $this->langs->update($id, $_POST);
+    echo json_encode(['status' => "SUCCESS", 'id' => $id]);
+  }
+
+  public function lang_del($id) {
+    $this->load->model('Langs_model', 'langs');
+    $this->langs->delete($id);
+    echo json_encode(['status' => "SUCCESS"]);
+  }
+
 }
