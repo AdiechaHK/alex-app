@@ -30,3 +30,14 @@ ol.no-num,ol.no-num ol {
     cursor: pointer;
     border-left-color: #337AB7;
 }
+
+#lang-list .cat-m:not(.form) td[data-lang-field=key]:after {
+    content: "Menu";
+    position: absolute;
+    font-size: 12px;
+    background: #1889B5;
+    color: white;
+    border-radius: 3px;
+    padding: 0 5px;
+    margin-left: 5px;
+}

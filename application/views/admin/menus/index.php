@@ -1,6 +1,6 @@
 <h2>
   Menus
-  <?=anchor('admin/menu_form', "New", ['class' => "btn btn-success pull-right"]); ?>
+  <?=anchor('admin/menu_form', "New", array('class' => "btn btn-success pull-right")); ?>
 </h2>
 <hr>
 
@@ -10,9 +10,9 @@
             <?=$menu->title?>
             <?=anchor('admin/menu_show/' . $menu->id, "Show")?>
             <?=anchor('admin/menu_form/' . $menu->id, "Edit")?>
-            <?=anchor('admin/menu_del/' . $menu->id, "Delete", [
+            <?=anchor('admin/menu_del/' . $menu->id, "Delete", array(
               'onClick' => "return confirm('are you sure');"
-              ])?>
+              ))?>
           </div>
 
           <?php if(isset($menu->sublist)) { ?>

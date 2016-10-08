@@ -25,14 +25,14 @@
         </h1><!--//logo-->           
         <div class="info col-md-8 col-sm-8">
           <ul class="menu-top navbar-right hidden-xs">
-            <li class="divider"><a href="index.html">Home</a></li>
-            <li class="divider"><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li class="divider"><a href="index.html">{{'HEADER_HOM'|translate}}</a></li>
+            <li class="divider"><a href="faq.html">{{'HEADER_FAQ'|translate}}</a></li>
+            <li><a href="contact.html">{{'HEADER_CNT'|translate}}</a></li>
           </ul><!--//menu-top-->
           <br />
           <div class="contact pull-right">
-            <p class="phone"><i class="fa fa-phone"></i>Call us today 0800 123 4567</p> 
-            <p class="email"><i class="fa fa-envelope"></i><a href="#">enquires@website.com</a></p>
+            <p class="phone"><i class="fa fa-phone"></i>{{'HEADER_CONTACT'|translate}}</p> 
+            <p class="email"><i class="fa fa-envelope"></i><a href="#">{{'HEADER_EMAIL'|translate}}</a></p>
           </div><!--//contact-->
         </div><!--//info-->
       </div><!--//header-main-->
@@ -76,7 +76,7 @@
                     data-delay="0"
                     data-close-others="false"
                     href="#">
-                      <?=$item->title?> <i class="fa <?=$iconClass?>"></i>
+                      {{'<?=$item->key?>'|translate}} <i class="fa <?=$iconClass?>"></i>
                   </a>
                   <ul class="dropdown-menu">
                     <?php foreach ($item->sublist as $k => $subMenuItem) { ?>
@@ -85,8 +85,12 @@
                   </ul>
                 </li>
             <?php } else { ?>
-            <li class="nav-item">
-              <a href="<?=getHref($item)?>">{{'<?=$item->title?>'|translate}}</a>
+            <li class="nav-item" data-ng-class='setClass(<?=json_encode($item)?>)'>
+              <!-- <a href="<?=getHref($item)?>" >{{'<?=$item->key?>'|translate}}</a> -->
+              <a 
+                data-ng-click='linkTo(<?=json_encode($item)?>)'
+                class="c-p"
+                >{{'<?=$item->key?>'|translate}}</a>
             </li>
             <?php } ?>
         <?php }?>
@@ -103,8 +107,8 @@
 
             <?php } ?>
 
-            <li class="nav-item">
-              <a href="#/something">{{'sample' | translate}}</a>
+            <li class="nav-item hide">
+              <a href="#/something">{{'SAMPLE' | translate}}</a>
             </li>
 
 
@@ -119,8 +123,8 @@
               class="form-control lang-dropdown"
               data-ng-change="changeLang()"
               data-ng-model="lang">
-              <option value="fr">France</option>
-              <option value="nl">Netherland</option>
+              <option value="fr">{{'LANG_FR'|translate}}</option>
+              <option value="nl">{{'LANG_NL'|translate}}</option>
             </select>
           </li>
         </ul>

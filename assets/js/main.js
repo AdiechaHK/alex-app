@@ -1,6 +1,7 @@
 var map;
 $(document).ready(function() {
 
+    /*
     var menuList = $('#navbar-collapse > ul > li.nav-item');
     $(menuList).click(function() {
         $(menuList).removeClass('active');
@@ -11,6 +12,7 @@ $(document).ready(function() {
         href = href.substr(href.indexOf('#'));
         if (window.location.hash == href) $(item).addClass('active');
     });
+    */
 
 
 

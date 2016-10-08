@@ -2049,3 +2049,6 @@ ul.custom-list-style li {
 .lang-dropdown:focus {
   border-color: #CCC
 }
+.c-p {
+  cursor: pointer;
+}

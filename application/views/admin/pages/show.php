@@ -1,6 +1,6 @@
 <h1>
   <?=$page->title?>
-  <?=anchor('admin/pages', "Back to list", ['class' => "btn btn-default pull-right"]);?>
+  <?=anchor('admin/pages', "Back to list", array('class' => "btn btn-default pull-right"));?>
 </h1>
 
 <hr>

@@ -15,6 +15,7 @@ class Views extends CI_Controller {
     $page = $this->pages->find($id);
 
     if($page == NULL) $this->load->view('errors/404');
+    else if($_GET['lang'] == 'nl') echo $page->content_l2;
     else echo $page->content_l1;
   }
 }

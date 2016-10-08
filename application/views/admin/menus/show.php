@@ -1,6 +1,6 @@
 <h2>
   Menu
-  <?=anchor('admin/menus', "Back to list", ['class' => "btn btn-default pull-right"]);?>
+  <?=anchor('admin/menus', "Back to list", array('class' => "btn btn-default pull-right"));?>
 </h2>
 <hr>
 <?=$menu->title?>

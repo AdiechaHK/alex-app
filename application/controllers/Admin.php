@@ -77,7 +77,6 @@ class Admin extends CI_Controller {
     redirect('admin/pages');
   }
 
-
   // Menu related methods
   public function menus() {
 
@@ -93,6 +92,7 @@ class Admin extends CI_Controller {
 
   public function menu_form($id = NULL)
   {
+    $this->load->model('Langs_model', 'langs');
     $this->load->model('Pages_model', 'pages');
     $this->load->model('Menus_model', 'menus');
     $data = array(
@@ -105,7 +105,13 @@ class Admin extends CI_Controller {
     if($id != null)
     {
       $menu = $this->menus->find($id);
-      if($menu != null) $data['menu'] = $menu;
+      if($menu != null) {
+        $data['menu'] = $menu;
+        $lang = $this->langs->get_one(array('key' => $menu->key));
+        if($lang != null) {
+          $data['lang'] = $lang;
+        }
+      }
       else die("Could not find specific menu !");
     }
     admin($this, 'admin/menus/form', $data); 
@@ -113,9 +119,25 @@ class Admin extends CI_Controller {
 
   public function menu_save($id = NULL)
   {
+    $this->load->model('Langs_model', 'langs');
     $this->load->model('Menus_model', 'menus');
-    if($id == NULL) $this->menus->insert($_POST);
-    else $this->menus->greedy_update($id, $_POST);
+    $menuItem = array(
+      'title' => $_POST['title'],
+      'type' => $_POST['type'],
+      'link' => $_POST['link'],
+      'key' => $_POST['key'],
+      'page' => $_POST['page'],
+      'parent' => $_POST['parent']
+    );
+    // echo json_encode($menuItem); exit;
+    if($id == NULL) $this->menus->insert($menuItem);
+    else $this->menus->greedy_update($id, $menuItem);
+    $this->langs->save(array(
+      'key' => $_POST['key'],
+      'category' => 'M',
+      'value_l1' => $_POST['value_l1'],
+      'value_l2' => $_POST['value_l2']
+      ));
     redirect('admin/menus');
   }
 
@@ -147,6 +169,9 @@ class Admin extends CI_Controller {
 
   public function menu_del($id) {
     $this->load->model('Menus_model', 'menus');
+    $this->load->model('Langs_model', 'langs');
+    $menu = $this->menus->find($id);
+    $this->langs->deleteCond(array('key' => $menu->key));
     $this->menus->delete($id);
     redirect('admin/menus');
   }
@@ -164,13 +189,13 @@ class Admin extends CI_Controller {
     $this->load->model('Langs_model', 'langs');
     if($id == NULL) $id = $this->langs->insert($_POST);
     else $this->langs->update($id, $_POST);
-    echo json_encode(['status' => "SUCCESS", 'id' => $id]);
+    echo json_encode(array('status' => "SUCCESS", 'id' => $id));
   }
 
   public function lang_del($id) {
     $this->load->model('Langs_model', 'langs');
     $this->langs->delete($id);
-    echo json_encode(['status' => "SUCCESS"]);
+    echo json_encode(array('status' => "SUCCESS"));
   }
 
 }

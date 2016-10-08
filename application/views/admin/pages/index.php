@@ -1,6 +1,6 @@
 <h2>
   Pages
-  <?=anchor('admin/page_form', "New", ['class' => "btn btn-success pull-right"]); ?>
+  <?=anchor('admin/page_form', "New", array('class' => "btn btn-success pull-right")); ?>
 </h2>
 <hr>
 
@@ -13,12 +13,12 @@
   <?php foreach ($pages as $page) { ?>
   <tr>
     <td><?=$page->title?></td>
-    <td><?=anchor('admin/page_show/' . $page->id, "Show", ['class' => "btn btn-default"])?></td>
-    <td><?=anchor('admin/page_form/' . $page->id, "Edit", ['class' => "btn btn-default"])?></td>
-    <td><?=anchor('admin/page_del/' . $page->id, "Delete", [
+    <td><?=anchor('admin/page_show/' . $page->id, "Show",array('class' => "btn btn-default"))?></td>
+    <td><?=anchor('admin/page_form/' . $page->id, "Edit",array('class' => "btn btn-default"))?></td>
+    <td><?=anchor('admin/page_del/' . $page->id, "Delete",array(
       'class' => "btn btn-default",
       'onClick' => "return confirm('are you sure');"
-      ])?></td>
+      ))?></td>
   </tr>
   <?php } ?>
 </table>

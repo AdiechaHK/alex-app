@@ -10,6 +10,7 @@ class Menus_model extends CI_Model
   public $type;
   public $link;
   public $page;
+  public $key;
   public $parent;
 
   public function __construct()
@@ -45,6 +46,7 @@ class Menus_model extends CI_Model
     $this->title    = isset($data['title'])?$data['title']:NULL; 
     $this->type     = isset($data['type'])?$data['type']:'PAGE'; 
     $this->link     = isset($data['link'])?$data['link']:NULL; 
+    $this->key      = isset($data['key'])?$data['key']:NULL; 
     $this->page     = isset($data['page']) && $data['page'] != "none"? $data['page']:NULL; 
     $this->parent   = isset($data['parent']) && $data['parent'] != "none"? $data['parent']:NULL; 
 
@@ -56,6 +58,7 @@ class Menus_model extends CI_Model
     $this->title    = isset($data['title'])?$data['title']:NULL; 
     $this->type     = isset($data['type'])?$data['type']:'PAGE'; 
     $this->link     = isset($data['link'])?$data['link']:NULL; 
+    $this->key      = isset($data['key'])?$data['key']:NULL; 
     $this->page     = isset($data['page']) && $data['page'] != "none"? $data['page']:NULL; 
     $this->parent   = isset($data['parent']) && $data['parent'] != "none"?$data['parent']:NULL; 
 
@@ -96,7 +99,7 @@ class Menus_model extends CI_Model
   private function getObject($menu) {
     $result = $this->get_menu_for_nesting($menu->id);
     if(sizeof($result) > 0) {
-      $menu->sublist = [];
+      $menu->sublist = array();
       foreach ($result as $item) {
         $menu->sublist[$item->id] = $this->getObject($item);
       }

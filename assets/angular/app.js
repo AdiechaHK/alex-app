@@ -11,8 +11,10 @@ app.config(function($routeProvider, $locationProvider, $translateProvider) {
 
   var initTranslater = function(lang) {
     $translateProvider.useStaticFilesLoader({
-      prefix: 'assets/lang/',
-      suffix: '.json'
+      prefix: 'index.php/api/lang?lang=',
+      suffix: ''
+      // prefix: 'assets/lang/',
+      // suffix: '.json'
     });
 
     $translateProvider.preferredLanguage(lang);
@@ -27,9 +29,9 @@ app.config(function($routeProvider, $locationProvider, $translateProvider) {
   }]);
 
   $routeProvider
-   .when('/show/:id', {
+   .when('/:lang/show/:id', {
     templateUrl: function(params) {
-      return views + '/views/show/' + params.id;
+      return views + '/views/show/' + params.id + "?lang=" + params.lang;
     }
    })
    .when('/page/:page', {templateUrl: function(params) {

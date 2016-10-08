@@ -88,8 +88,11 @@ $(document).ready(function() {
   var initCkEditor = function() {
     if(typeof CKEDITOR == "undefined") setTimeout(initCkEditor, 100);
     else {
-      if($("#l1").size() > 0) CKEDITOR.replace( 'l1' );
-      if($("#l2").size() > 0) CKEDITOR.replace( 'l2' );
+      if($(".cg-ckeditor").size() > 0) $(".cg-ckeditor").ckeditor();
+
+
+      // if($("#l1").size() > 0) CKEDITOR.replace( 'l1' );
+      // if($("#l2").size() > 0) CKEDITOR.replace( 'l2' );
     }
   }
   initCkEditor();
@@ -108,7 +111,10 @@ $(document).ready(function() {
   }
 
   var generateLangForm = function(target, id) {
-    var line = $("<tr/>", {"data-target": typeof id != "undefined"? id: "new"});
+    var line = $("<tr/>", {
+      "data-target": typeof id != "undefined"? id: "new",
+      "class": "form " + $(target).attr('class')
+    });
     $(line).append(getInput('key', $("[data-lang-field=key]", target).text()));
     $(line).append(getInput('value_l1', $("[data-lang-field=value_l1]", target).text()));
     $(line).append(getInput('value_l2', $("[data-lang-field=value_l2]", target).text()));
@@ -119,14 +125,17 @@ $(document).ready(function() {
   }
   var generateLangRow = function(target, id) {
     $(target).removeAttr('data-target');
+    $(target).removeClass('form');
     $(target).attr('data-lang-id', id);
     $("[data-lang-field]", target).each(function(i, item) {
       $(item).html($("input", item).val());
     });
-    $("[data-action]", target).empty()
-      .append($("<button/>", {'class': "btn btn-default edit", 'text': "Edit"}))
-      .append("&nbsp;")
-      .append($("<button/>", {'class': "btn btn-default delete", 'text': "Delete"}));
+    var row = $("[data-action]", target).empty();
+    row.append($("<button/>", {'class': "btn btn-default edit", 'text': "Edit"}))
+    if($(target).attr('class').split(" ").indexOf('cat-m') == -1) {
+      row.append("&nbsp;")
+      row.append($("<button/>", {'class': "btn btn-default delete", 'text': "Delete"}));
+    }
   }
 
   var getTarget = function(ele) {
@@ -136,7 +145,7 @@ $(document).ready(function() {
   $( '#lang-list' ).delegate('.save ', 'click', function() {
     var target = getTarget(this);
     var id = $(target).data('target');
-    var json = {};
+    var json = {'category': $(target).attr('class').split(" ").indexOf("cat-m") != -1? 'M': 'G'};
     var callback = function(){};
 
     $("[data-lang-field]", target).each(function(i, item) {

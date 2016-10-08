@@ -14,7 +14,7 @@ class Api extends CI_Controller {
 
     $json = array();
 
-    foreach (['base_menu', 'level_menu'] as $collection) {
+    foreach (array('base_menu', 'level_menu') as $collection) {
       foreach ($menus as $menu) {
         $json = $this->$collection($menu, $json);
       }
@@ -42,10 +42,10 @@ class Api extends CI_Controller {
   }
 
   public function lang() {
-    $langs = [
+    $langs = array(
       'fr' => "value_l1",
       'nl' => "value_l2"
-    ];
+    );
 
     $loadLang = $_GET['lang'];
 

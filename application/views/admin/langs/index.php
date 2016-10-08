@@ -11,13 +11,15 @@
 
     <?php foreach ($langs as $lang) { ?>
       
-      <tr data-lang-id="<?=$lang->id?>">
+      <tr data-lang-id="<?=$lang->id?>" class="cat-<?=strtolower($lang->category)?strtolower($lang->category):'g'?>">
         <td data-lang-field="key"><?=$lang->key?></td>
         <td data-lang-field="value_l1"><?=$lang->value_l1?></td>
         <td data-lang-field="value_l2"><?=$lang->value_l2?></td>
         <td data-action>
           <button class="btn btn-default edit" data-lang-id="<?=$lang->id?>"> Edit </button>
-          <button class="btn btn-default delete" data-lang-id="<?=$lang->id?>"> Delete </button>
+          <?php if ($lang->category != 'M') { ?>
+            <button class="btn btn-default delete" data-lang-id="<?=$lang->id?>"> Delete </button>
+          <?php } ?>
         </td>
       </tr>
 
